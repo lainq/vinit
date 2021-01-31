@@ -1,3 +1,3 @@
 @echo off
 cls
-ts-node index.ts new data
+ts-node index.ts -n shit

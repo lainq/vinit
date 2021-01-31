@@ -1,32 +1,16 @@
-import {red} from 'chalk'
+import {evokeCommandArgument} from "./argument.js"
+import {Project} from "./project/project"
 
-class ArgumentParse {
-    private arguments:Array<string>;
-    private readonly values:any;
+// the argument parser results
+const args:any = evokeCommandArgument(process.argv)
 
-    constructor(args:Array<string>){
-        this.arguments = args.slice(2, args.length);
-        this.values = {
-            command : this.getInformation(0),
-            name : this.getInformation(1)
-        }
-        console.log(this.values)
-    }
-
-    private getInformation(index) {
-        if(this.arguments.length > 1){
-            return this.arguments[index]
-        } else {
-            this.evokeError("Insufficient arguments")
-        }
-    }
-
-
-    private evokeError(errorStatement){
-        console.log(red(errorStatement.toString()))
-    }
+const projectNameExists = (args:any) => {
+    return Object.keys(args).includes("new")
 }
 
-const argument = process.argv
+// check for project name
+if(projectNameExists(args)){
+    const project = new Project(args.new)
+    project.initializeProject()
+}
 
-const parser = new ArgumentParse(argument)
