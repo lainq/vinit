@@ -7,6 +7,9 @@ import {ErrorInformation} from "../error/error"
 // prompt
 import {createPrompt} from "./prompt.js"
 
+// project generator
+import {Generator} from "./generate"
+
 // check if the project name does not
 // exists
 /**
@@ -77,7 +80,8 @@ export class Project {
                     type : "confirm"
                 }
             ], function(data) {
-                console.log(data)
+                console.clear()
+                const projectGenerator = new Generator(data).init()
             }
            )
            
