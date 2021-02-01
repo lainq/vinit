@@ -79,10 +79,10 @@ export class Project {
                     name : `Are you sure you want to create project ${this.projectName}`,
                     type : "confirm"
                 }
-            ], function(data) {
+            ], function(data, projectName) {
                 console.clear()
-                const projectGenerator = new Generator(data).init()
-            }
+                const projectGenerator = new Generator(data, projectName).init()
+            }, this.projectName
            )
            
 

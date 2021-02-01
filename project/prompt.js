@@ -1,8 +1,8 @@
 const inquirer = require('inquirer')
 
-function createPrompt(data, func) {
+function createPrompt(data, func, projectName) {
     inquirer.prompt(data).then(function(response){
-        func(response)
+        func(response, projectName)
     })
 }
 
