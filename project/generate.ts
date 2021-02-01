@@ -10,6 +10,7 @@ export class Generator {
 
     constructor(data:any, project:string){
         this.data = data
+        this.name = project
     }
 
     public init(){
@@ -17,7 +18,7 @@ export class Generator {
             const configData:Configuration.ConfigFormat = {
                 config : this.data
             }
-            const config = new Configuration.Config(configData)
+            const config = new Configuration.Config(configData, this.name)
             config.createConfiguration()
         } else {
             console.log(red("process aborted"))

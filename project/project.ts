@@ -33,7 +33,7 @@ function isValidProjectName(projectName:string):boolean{
  * @param {string} projectPath
  * @returns {void}
  */
-function createDirectory(projectPath:string):void{
+export function createDirectory(projectPath:string):void{
     mkdir(projectPath, function(err: NodeJS.ErrnoException){
         if(err){
          var error:ErrorInformation = new ErrorInformation("Unable to create project")
