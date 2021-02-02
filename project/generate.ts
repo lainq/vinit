@@ -14,12 +14,18 @@ export class Generator {
     }
 
     public init(){
+    
         if(this.data[`Are you sure you want to create project shit`]){
             const configData:Configuration.ConfigFormat = {
                 config : this.data
             }
             const config = new Configuration.Config(configData, this.name)
             config.createConfiguration()
+
+            const isFrontend:boolean = this.data.type == "frontend"
+
+            if(isFrontend){
+            }
         } else {
             console.log(red("process aborted"))
         }
