@@ -1,2 +1,1 @@
-# types.js
-Typed javascript
+# LOLDB
