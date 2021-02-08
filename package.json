@@ -1,0 +1,24 @@
+{
+  "name": "types.js",
+  "version": "1.0.0",
+  "description": "Typed javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranavbaburaj/poop.git"
+  },
+  "keywords": [
+    "type",
+    "js",
+    "typed"
+  ],
+  "author": "Pranav Baburaj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pranavbaburaj/poop/issues"
+  },
+  "homepage": "https://github.com/pranavbaburaj/poop#readme"
+}
