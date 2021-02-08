@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/pranavbaburaj/poop/issues"
   },
-  "homepage": "https://github.com/pranavbaburaj/poop#readme"
+  "homepage": "https://github.com/pranavbaburaj/poop#readme",
+  "dependencies": {
+    "@types/node": "^14.14.25",
+    "commander": "^7.0.0"
+  }
 }
