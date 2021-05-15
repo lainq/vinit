@@ -4,14 +4,17 @@
   "description": "V Setup",
   "main": "index.js",
   "dependencies": {
-    "chalk": "^4.1.1"
+    "@types/inquirer": "^7.3.1",
+    "@types/node": "^15.3.0",
+    "chalk": "^4.1.1",
+    "inquirer": "^8.0.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ts" : "ts-node index.ts",
-    "build" : "tsc index.ts --outFile ./dist/index.js --module system",
-    "start" : "npm run build & node dist/index.js"
+    "ts": "ts-node index.ts",
+    "build": "tsc index.ts --outFile ./dist/index.js --module system",
+    "start": "npm run build & node dist/index.js"
   },
   "repository": {
     "type": "git",

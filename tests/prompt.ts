@@ -5,7 +5,7 @@ const prompt = new Prompt({
     query : "LOL",
     color : cyan,
     suffix : '[?]',
-    callback : (data:string) => {
-        console.log(data)
+    callback : (data:string, obj:Prompt) => {
+        console.log(obj.answers)
     }
 })

@@ -15,6 +15,7 @@ export interface PromptParameters {
 
 export class Prompt {
     private config:PromptParameters
+    public answers:Array<string> = []
     
     constructor(config:PromptParameters) {
         this.config = config
@@ -24,7 +25,8 @@ export class Prompt {
     private createPrompt = () => {
         readlineInterface.question(this.config.color(`${this.config.query} ${this.config.suffix} `), (solution) => {
             if(this.config.callback){
-                this.config.callback(solution.toString())
+                this.answers.push(solution)
+                this.config.callback(solution.toString(), this)
             }
             readlineInterface.close()
         })

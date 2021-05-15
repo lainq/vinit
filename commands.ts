@@ -1,3 +1,5 @@
+import { initialize } from "./commands/init";
+
 export const commands: Map<string, Array<string>> = new Map<
   string,
   Array<string>
@@ -14,5 +16,7 @@ export const performCommand = (
   params: Map<string, string>,
   cli: Array<string>
 ) => {
- 
+ if(command == 'init') {
+   initialize()
+ }
 };
