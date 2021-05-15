@@ -1,7 +1,9 @@
 import { readFileSync } from "fs";
 import { prompt } from "inquirer";
+import { hostname } from "os";
 import { join } from "path";
 import { VSetupException } from "../exception";
+import { gitignore } from "./constants/gitignore";
 import { Project } from "./project";
 
 export interface InitResults {
@@ -123,7 +125,9 @@ export function initialize() {
             data : 'dummydata'
           })],
           [join('scripts', 'script.sh'), readFileSync(join(__dirname, 'scripts', 'starter.sh')).toString()],
-          [join('scripts', 'script.ps1'), readFileSync(join(__dirname, 'scripts', 'starter.ps1')).toString()]
+          [join('scripts', 'script.ps1'), readFileSync(join(__dirname, 'scripts', 'starter.ps1')).toString()],
+          ['.env', `HOSTNAME=${hostname()}\n`],
+          ['.gitignore', gitignore()]
         ]
       ),
       directories : ['docs', 'json', 'xml', 'src', join('src', 'tests'), 'scripts']
