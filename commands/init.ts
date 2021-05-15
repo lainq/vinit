@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import inquirer from "inquirer";
+import { prompt } from "inquirer";
 import { join } from "path";
 import { VSetupException } from "../exception";
 import { Project } from "./project";
@@ -68,7 +68,7 @@ export function initialize() {
     })
   }
 
-  inquirer.prompt(prompts).then((answers) => {
+  prompt(prompts).then((answers) => {
     let params:Map<string, string> = new Map<string, string>();
     Object.keys(answers).forEach((key:string) => {
       if(key == 'version'){

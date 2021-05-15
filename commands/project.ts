@@ -1,6 +1,7 @@
 import { existsSync, mkdir, readdirSync, Stats, statSync, writeFile } from "fs";
 import { join } from "path";
 import { cwd } from "process";
+import simpleGit, { SimpleGitOptions } from "simple-git";
 import { VSetupException } from "../exception";
 import { InitResults } from "./init"
 
@@ -38,6 +39,18 @@ export class Project {
         Array.from(this.files.files.keys()).forEach((fileName:string) => {
             this.createFile(join(path, fileName), this.files.files.get(fileName)?.trim() || '\n')
         })
+
+        const options:Partial<SimpleGitOptions> = {
+            baseDir: path,
+            binary: 'git',
+            maxConcurrentProcesses: 6,
+        }
+        const git = simpleGit(options)
+        try {
+            git.init()
+        } catch(exception:any) {
+            // ignore the exception
+        }
     }
 
     private createFile(filename:string, content:string):void {
