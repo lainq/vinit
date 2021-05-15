@@ -1,5 +1,11 @@
 import inquirer from "inquirer";
 import { VSetupException } from "../exception";
+import { Project } from "./project";
+
+export interface InitResults {
+  mod : string,
+  params : Map<string, string>;
+}
 
 function stringArray(data:Array<string>):string {
   let returnValue:string = '[';
@@ -103,7 +109,13 @@ export function initialize() {
         license: '${params.get('license')}'
     }
     `.trim()
-    console.log(mod)
+    const project = new Project({
+      files : new Map<string, string>(),
+      directories : []
+    }, {
+      mod : mod,
+      params : params
+    })
   }).catch((exception:any) => {
     const error = new VSetupException({
       message : exception.message || exception.info
