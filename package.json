@@ -1,0 +1,24 @@
+{
+  "name": "vlol",
+  "version": "1.0.0",
+  "description": "A simple javascript calculator\r (I was out of ideas)",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^4.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranavbaburaj/calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pranavbaburaj/calculator/issues"
+  },
+  "homepage": "https://github.com/pranavbaburaj/calculator#readme"
+}
