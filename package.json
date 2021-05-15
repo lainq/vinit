@@ -1,14 +1,17 @@
 {
-  "name": "vlol",
+  "name": "vsetup",
   "version": "1.0.0",
-  "description": "A simple javascript calculator\r (I was out of ideas)",
+  "description": "V Setup",
   "main": "index.js",
   "dependencies": {
     "chalk": "^4.1.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts" : "ts-node index.ts",
+    "build" : "tsc index.ts --outFile ./dist/index.js --module system",
+    "start" : "npm run build & node dist/index.js"
   },
   "repository": {
     "type": "git",

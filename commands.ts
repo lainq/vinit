@@ -2,7 +2,7 @@ export const commands: Map<string, Array<string>> = new Map<
   string,
   Array<string>
 >([
-  ['init', ['name', 'license', 'author']],
+  ['init', []],
 ]);
 
 /**
