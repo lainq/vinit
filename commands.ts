@@ -1,12 +1,12 @@
-import { initialize } from "./commands/init";
-import { VMake } from "./commands/run";
+import {initialize} from './commands/init';
+import {VMake} from './commands/run';
 
 export const commands: Map<string, Array<string>> = new Map<
   string,
   Array<string>
 >([
   ['init', []],
-  ['run', ['script']]
+  ['run', ['script']],
 ]);
 
 /**
@@ -18,9 +18,9 @@ export const performCommand = (
   params: Map<string, string>,
   cli: Array<string>
 ) => {
- if(command == 'init') {
-   initialize()
- } else if(command == 'run'){
-   const run = new VMake(params.get('script'))
- }
+  if (command == 'init') {
+    initialize();
+  } else if (command == 'run') {
+    const run = new VMake(params.get('script'));
+  }
 };

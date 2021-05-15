@@ -1,4 +1,4 @@
-import { red, yellow } from "chalk";
+import {red, yellow} from 'chalk';
 
 export interface VSetExceptionParams {
   message: string;

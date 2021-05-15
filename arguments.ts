@@ -1,6 +1,6 @@
 import {argv} from 'process';
-import { commands, performCommand } from './commands';
-import { VSetupException } from './exception';
+import {commands, performCommand} from './commands';
+import {VSetupException} from './exception';
 
 export class VSetupArgs {
   private readonly arguments: Array<string>;

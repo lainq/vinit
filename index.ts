@@ -1,3 +1,3 @@
-import { VSetupArgs } from "./arguments";
+import {VSetupArgs} from './arguments';
 
 const parser = new VSetupArgs();
