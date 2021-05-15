@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, Stats, statSync } from "fs";
+import { existsSync, mkdir, readdirSync, Stats, statSync, writeFile } from "fs";
 import { join } from "path";
 import { cwd } from "process";
 import { VSetupException } from "../exception";
@@ -22,10 +22,35 @@ export class Project {
 
     private create = ():void => {
         const path:string = this.createValidProjectDirectory(this.data.params.get('name'))
-        console.log(path)
+        this.validateDirectory(path)
+
+        this.files.files.set('v.mod', this.data.mod)
+        this.files.directories.forEach((dirName:string) => {
+            mkdir(join(path, dirName), (err:NodeJS.ErrnoException | null) => {
+                if(err){
+                    const error = new VSetupException({
+                        message : err?.message || ''
+                    }).throwException(true)
+                }
+            })
+        })
+
+        Array.from(this.files.files.keys()).forEach((fileName:string) => {
+            this.createFile(join(path, fileName), this.files.files.get(fileName)?.trim() || '\n')
+        })
     }
 
-    private validateDirectory(path:string):boolean {
+    private createFile(filename:string, content:string):void {
+        writeFile(filename, content, (err:NodeJS.ErrnoException | null) => {
+            if(err){
+                const error = new VSetupException({
+                    message : err?.message || ''
+                }).throwException(true)
+            }
+        })
+    }
+
+    private validateDirectory(path:string):any {
         const exists = Project.exists(path)
         if(exists){
             if(readdirSync(path).length != 0){
@@ -34,8 +59,16 @@ export class Project {
                     suggestion : "Try another project name"
                 }).throwException(true)
             }
+        } else {
+            mkdir(path, (err:NodeJS.ErrnoException | null) => {
+                if(err){
+                    const error = new VSetupException({
+                        message : err?.message || ''
+                    }).throwException(true)
+                }
+            })
         }
-        console.log("Ready")
+        return path
     }
 
     public static exists(path:string, file:boolean=false):boolean {

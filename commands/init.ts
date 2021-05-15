@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import { join } from "path";
 import { VSetupException } from "../exception";
 import { Project } from "./project";
 
@@ -110,8 +111,15 @@ export function initialize() {
     }
     `.trim()
     const project = new Project({
-      files : new Map<string, string>(),
-      directories : []
+      files : new Map<string, string>(
+        [
+          ['README.md', `
+          # ${params.get('name')}\n
+          ${params.get('description')}
+          `]
+        ]
+      ),
+      directories : ['docs', 'json', 'xml', 'src', join('src', 'tests'), 'scripts']
     }, {
       mod : mod,
       params : params

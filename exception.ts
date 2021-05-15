@@ -1,4 +1,4 @@
-import { red } from "chalk";
+import { red, yellow } from "chalk";
 
 export interface VSetExceptionParams {
   message: string;
@@ -33,7 +33,7 @@ export class VSetupException {
   public throwException(fatal: boolean) {
     console.log(red(this.message));
     if (this.suggestion) {
-      console.log(red(this.suggestion));
+      console.log(yellow(this.suggestion));
     }
 
     if (fatal) {
