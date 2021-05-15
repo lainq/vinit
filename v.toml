@@ -3,4 +3,4 @@ compiler = 'ts-node'
 filename = 'E:\vlol\tests\prompt.ts'
 
 [scripts]
-run = '$compiler $filename $testname lol'
+run = '$compiler $filename'

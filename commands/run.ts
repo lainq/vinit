@@ -1,3 +1,4 @@
+import { exec, ExecException, execSync } from "child_process";
 import { readdirSync, readFileSync, statSync } from "fs";
 import { join } from "path";
 import { cwd } from "process";
@@ -46,7 +47,22 @@ export class VMake {
             }
             this.scripts.set(scriptName, data.join(' '))
         })
-        console.log(this.scripts)
+    }
+
+    private execute():void | null {
+        if(!this.script){
+            return null;
+        }
+        const executeScript:string | undefined = this.scripts.get(this.script)
+        if(!executeScript){
+            const error = new VSetupException({
+                message : `${this.script} is not defined in the scripts`
+            }).throwException(true)
+        }
+
+        // TODO: Fix the exec
+        console.log(executeScript);
+        execSync(executeScript || '')
     }
 
     private make():void {
@@ -60,6 +76,8 @@ export class VMake {
             const json:VMakeObject = parse(readFileSync(join(cwd(), this.filename)).toString()) as VMakeObject
             this.createVariables(json)
             this.createScripts(json)
+
+            this.execute()
         } catch(exception:any) {
             const error = new VSetupException({
                 message : exception.message 
