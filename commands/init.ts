@@ -1,3 +1,4 @@
+import { readFileSync } from "fs";
 import inquirer from "inquirer";
 import { join } from "path";
 import { VSetupException } from "../exception";
@@ -116,7 +117,13 @@ export function initialize() {
           ['README.md', `
           # ${params.get('name')}\n
           ${params.get('description')}
-          `]
+          `],
+          [join('docs', 'README.md'), '# Docs'],
+          [join('json', 'example.json'), JSON.stringify({
+            data : 'dummydata'
+          })],
+          [join('scripts', 'script.sh'), readFileSync(join(__dirname, 'scripts', 'starter.sh')).toString()],
+          [join('scripts', 'script.ps1'), readFileSync(join(__dirname, 'scripts', 'starter.ps1')).toString()]
         ]
       ),
       directories : ['docs', 'json', 'xml', 'src', join('src', 'tests'), 'scripts']
