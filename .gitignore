@@ -117,3 +117,12 @@ dist
 .vscode-test
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+
+# Binaries for programs and plugins
+main
+utils
+*.exe
+*.exe~
+*.so
+*.dylib
+*.dll
