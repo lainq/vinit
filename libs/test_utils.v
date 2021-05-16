@@ -1,4 +1,4 @@
-import utility
+import prompt
 
 // fn test_u() {
 // 	utility.helloworld()
@@ -6,5 +6,11 @@ import utility
 // }
 
 fn main() {
-	utility.helloworld()
+	data := prompt.PromptOptions {
+		message : 'lol'
+	}
+	c := prompt.Choices {
+		choices : ['lol1' 'lol2'],
+	}
+	println(prompt.choices(data, c, true))
 }
