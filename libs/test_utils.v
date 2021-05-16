@@ -13,4 +13,5 @@ fn main() {
 		choices : ['lol1' 'lol2'],
 	}
 	println(prompt.choices(data, c, true))
+	println(__file__)
 }

@@ -1,3 +1,4 @@
+import { VGetPackage } from './commands/get';
 import {initialize} from './commands/init';
 import {VMake} from './commands/run';
 
@@ -7,6 +8,7 @@ export const commands: Map<string, Array<string>> = new Map<
 >([
   ['init', []],
   ['run', ['script']],
+  ['get', ['url', 'name']]
 ]);
 
 /**
@@ -22,5 +24,7 @@ export const performCommand = (
     initialize();
   } else if (command == 'run') {
     const run = new VMake(params.get('script'));
+  } else if(command == 'get'){
+    const get = new VGetPackage(params)
   }
 };
