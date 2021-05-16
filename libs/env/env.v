@@ -2,6 +2,9 @@ module env
 
 import os { is_file, read_file, setenv }
 
+// Load all the variables in the list of
+// variables passed in as the parameter
+// Environment variables are overwritten
 fn load(variables []EnvironmentVariable) {
 	for index := 0; index < variables.len; index++ {
 		current := variables[index]
@@ -9,8 +12,13 @@ fn load(variables []EnvironmentVariable) {
 	}
 }
 
+// The public loadenv function that the user
+// have access to
 pub fn loadenv(filename string) ?int {
-	if is_file(filename){
+	// Checks if the file exists, else throw
+	// an error
+	if is_file(filename) {
+		// Read the file and create variables
 		file_content := read_file(filename) or {
 			panic('Error reading $filename')
 			return 0
