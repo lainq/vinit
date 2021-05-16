@@ -1,6 +1,6 @@
 # Prompt
 
-```
+```v
 import prompt
 
 
