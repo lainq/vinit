@@ -1,4 +1,4 @@
-module main
+module utility
 
 pub fn helloworld() {
 	println("Hello")
