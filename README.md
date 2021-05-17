@@ -38,7 +38,7 @@ The toml file has two main parts.
 		 1) `variables`: Where all the variables are declared
 		 2) `scripts` : Where all the scripts are defined
 An example `v.toml` file
-``sh
+```sh
 [variables]
 compiler = 'ts-node'
 filename = 'E:\vlol\tests\prompt.ts'
@@ -46,7 +46,7 @@ filename = 'E:\vlol\tests\prompt.ts'
 [scripts]
 run = '$compiler $filename'
 ```
-```
+
 To run the script
 ```sh
 ts-node index.ts run --script-<script-name>
