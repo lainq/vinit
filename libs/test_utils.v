@@ -1,5 +1,5 @@
-import generate { Files, create_all, extensions }
-import os { join_path , getwd }
+import generate { extensions }
+import os { getwd, join_path }
 
 fn main() {
 	// data := Files{
@@ -12,7 +12,7 @@ fn main() {
 	// }
 	// data.create() or {
 	// 	panic(err)
-	// 	return 
+	// 	return
 	// }
 	// create_all(
 	// 	['test'],
@@ -20,8 +20,6 @@ fn main() {
 	// ) or {
 	// 	panic(err)
 	// }
-	d := extensions(join_path(getwd())) or {
-		panic(err)
-	}
+	d := extensions(join_path(getwd())) or { panic(err) }
 	println(d)
 }
