@@ -1,8 +1,5 @@
-import jsonify
+import generate
 
 fn main() {
-	jsonify.initialize(jsonify.JsonStore{
-		filename : "lol",
-		extension : "json"
-	})
+	
 }
