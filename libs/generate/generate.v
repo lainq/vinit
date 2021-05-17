@@ -1,6 +1,42 @@
 module generate
 
-import os { getwd, is_dir, is_dir_empty, join_path, mkdir, open, is_file, create }
+import os { ls, getwd, is_dir, is_dir_empty, join_path, mkdir, open, is_file, create }
+
+pub fn extensions(path string) ?map[string]int {
+	mut file_extensions := map[string]int{}
+	data := ls(path) or {
+		return err
+	}
+	for index := 0; index <data.len; index++ {
+		current := join_path(path, data[index])
+		if is_dir(current){
+			continue
+		}
+	    ext := data[index].split('.')
+		current_ext := ext[ext.len-1]
+		if current_ext !in file_extensions {
+			file_extensions[current_ext] = 0
+		} 
+		file_extensions[current_ext] += 1
+	}
+
+	return file_extensions
+}
+
+pub fn create_all(directories []string, log bool) ?int {
+	for index := 0; index < directories.len; index++ {
+		current_create_dir := directories[index]
+		create := mkdir(join_path(getwd(), current_create_dir)) or {
+			return 1
+		}
+		if create {
+			println('[SUCCESS] Created $current_create_dir')
+		} else {
+			println('[ERROR] Cannot create $current_create_dir')
+		}
+	}
+	return directories.len
+} 
 
 fn create_byte_array(data string) []byte {
 	mut return_value := []byte{}
