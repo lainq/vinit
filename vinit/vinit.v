@@ -1,4 +1,4 @@
-import arguments { ArgumentParser }
+import arguments { ArgumentParser, execute_command }
 
 fn main() {
 	mut argument_parser := ArgumentParser{}
@@ -6,5 +6,5 @@ fn main() {
 		println(err)
 		return
 	}
-	println(params)
+	execute_command(command, params)
 }
