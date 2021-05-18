@@ -3,6 +3,15 @@ module commands
 import generate { Files }
 import prompt { prompt, PromptOptions }
 import exception { VinitException }
+import os { join_path, write_file, hostname }
+
+fn write_files(files map[string]string, path string) {
+	for key, value in files {
+		write_file(join_path(path, key), value) or {
+			panic(err)
+		}
+	}
+}
 
 fn prompt_user(questions []string, suffix string) map[string]string {
 	mut solutions := map[string]string{}
@@ -41,8 +50,8 @@ pub fn initialize_v_project() int {
 	}
 	files := Files{
 		path : project_settings['name'],
-		files : ['lol.txt'],
-		directories : ['je']
+		files : ['README.md', 'v.toml', 'v.mod', '.env'],
+		directories : ['scripts', 'json', 'docs', 'src', join_path('src', 'tests')]
 	}
 	files.create() or {
 		error := VinitException{
@@ -52,5 +61,14 @@ pub fn initialize_v_project() int {
 		error.raise()
 		return 1
 	}
+
+	write_files(map{
+		'v.toml' : toml,
+		'.env' : 'HOSTNAME=${hostname()}',
+		join_path('docs', 'README.md') : '# Documentation',
+		join_path('scripts', filename()) : script,
+		'v.mod' : create_module(project_settings)
+
+	}, project_settings['name'])
 	return 0
 }
