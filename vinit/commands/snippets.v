@@ -3,7 +3,7 @@ module commands
 pub const (
 	compiler = 'v'
 	filename = 'main.v'
-	toml = "
+	toml     = "
 [variables]
 compiler = '$compiler'
 filename = '$filename'
@@ -11,7 +11,7 @@ filename = '$filename'
 [scripts]
 run = '$compiler $filename'
 	"
-	script = '
+	script   = '
 echo "Hello World"
 	'
 )

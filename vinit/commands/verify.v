@@ -24,7 +24,7 @@ fn generate_tag_string(tags string) string {
 	tag_array := tags.split(',').map(fn (character string) string {
 		return character.trim(' ')
 	})
-	return "[ ${tag_array.join(', ')} ]"
+	return '[ ${tag_array.join(', ')} ]'
 }
 
 fn filename() string {
@@ -38,14 +38,14 @@ fn filename() string {
 fn create_module(project_settings map[string]string) string {
 	return '
 Module {
-	name : ${project_settings["name"]},
-	version : ${project_settings["version"]},
-	description : ${project_settings["description"]},
-	repo_url : ${project_settings["repo_url"]},
-	author : ${project_settings["author"]},
-	tags : ${project_settings["tags"]},
-	vcs : ${project_settings["vcs"]},
-	license : ${project_settings["license"]}
+	name : ${project_settings['name']},
+	version : ${project_settings['version']},
+	description : ${project_settings['description']},
+	repo_url : ${project_settings['repo_url']},
+	author : ${project_settings['author']},
+	tags : ${project_settings['tags']},
+	vcs : ${project_settings['vcs']},
+	license : ${project_settings['license']}
 }
 	'
 }
