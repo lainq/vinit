@@ -2,6 +2,7 @@ module commands
 
 import generate { Files }
 import prompt { prompt, PromptOptions }
+import exception { VinitException }
 
 fn prompt_user(questions []string, suffix string) map[string]string {
 	mut solutions := map[string]string{}
@@ -38,6 +39,18 @@ pub fn initialize_v_project() int {
 			project_settings[key] = generate_tag_string(value)
 		}
 	}
-	println(project_settings)
+	files := Files{
+		path : project_settings['name'],
+		files : ['lol.txt'],
+		directories : ['je']
+	}
+	files.create() or {
+		error := VinitException{
+			exception_message : err.msg,
+			fatal : true
+		}
+		error.raise()
+		return 1
+	}
 	return 0
 }
