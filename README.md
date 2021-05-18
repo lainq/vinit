@@ -1,6 +1,6 @@
 
 # Vinit
-A tool for v :wink:
+Vinit is a command line tool to generate v projects and run scripts
 
 ## Setup
 You will have to manually clone the repository to install vinit.
