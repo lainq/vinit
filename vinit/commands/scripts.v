@@ -3,23 +3,6 @@ module commands
 import os { args, getwd, is_file, join_path, read_file }
 import exception { VinitException }
 
-struct ScriptFileParser {
-	data []string
-}
-
-fn (parser ScriptFileParser) parse() {
-	for line in parser.data {
-		println(line)
-	}
-}
-
-struct ScriptsFile {
-	filename string
-	root     string
-mut:
-	exists bool
-}
-
 struct InvalidCommandException {
 	message    string
 	suggestion string
@@ -34,6 +17,64 @@ fn (params InvalidCommandException) throw_exception() {
 	}
 	error.raise()
 }
+
+struct ScriptFileParser {
+	data []string
+mut:
+	scripts map[string]string = map{}
+}
+
+fn map_filter(data map[string]string, value string) string {
+	for key, element in data {
+		if element == value {
+			return key
+		}
+	}
+	return ''
+}
+
+fn (mut parser ScriptFileParser) parse(filename string) map[string]string {
+	mut line_count := 0
+	for line in parser.data {
+		if line.len == 0 || line.starts_with('#') {
+			continue
+		}
+		statements := line.split('=')
+		name := statements[0].trim(' ')
+		value := statements[1..].join('=').trim(' ')
+		if name.len == 0 {
+			InvalidCommandException{
+				message : 'Variables names cannot be of length less than 1.',
+				suggestion : 'line number ${line_count + 1} in $filename',
+				fatal : true
+			}.throw_exception()
+		}
+		if name in parser.scripts {
+			InvalidCommandException{
+				message : 'Found duplicate variable name - $name',
+				suggestion : 'line number ${line_count + 1} in $filename',
+				fatal : true
+			}.throw_exception()
+		}
+
+		duplicate_variables := map_filter(parser.scripts, value)
+		if duplicate_variables.len != 0 {
+			println('[WARNING] Found duplicate for variable $${duplicate_variables} : $name')
+		}
+
+		parser.scripts[name] = value
+		line_count += 1
+	}
+	return parser.scripts
+}
+
+struct ScriptsFile {
+	filename string
+	root     string
+mut:
+	exists bool
+}
+
 
 fn find_script_file(script_file ScriptsFile) bool {
 	filepath := join_path(script_file.root, script_file.filename)
@@ -57,6 +98,9 @@ pub fn execute_v_script(script string, variables map[string]string) {
 			return
 		}
 
-		println(file_content)
+		mut parser := ScriptFileParser{
+			data : file_content.split_into_lines()
+		}
+		parser.parse(file.filename)
 	}
 }
