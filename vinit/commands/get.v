@@ -1,15 +1,15 @@
 module commands
 
-import os { vmodules_dir, is_dir, mkdir, execute, join_path }
-import exception { VinitException }
+import os { execute, is_dir, join_path, mkdir, vmodules_dir }
+import exception
 
 struct CloneRepository {
-	url string
+	url  string
 	name string
 }
 
 fn (repo CloneRepository) install() {
-	execute('git clone ${repo.url} ${join_path(vmodules_dir(), repo.name)}')
+	execute('git clone $repo.url ${join_path(vmodules_dir(), repo.name)}')
 }
 
 fn check_if_module_exists(module_name string) bool {
@@ -20,7 +20,7 @@ fn check_if_module_exists(module_name string) bool {
 		}
 		return false
 	}
-	return is_dir(join_path(vmodules_dir(), module_name))	
+	return is_dir(join_path(vmodules_dir(), module_name))
 }
 
 pub fn get() int {
@@ -30,8 +30,8 @@ pub fn get() int {
 		println('[INSTALLED] $name seams to be already installed')
 	} else {
 		CloneRepository{
-			url : url,
-			name : name
+			url: url
+			name: name
 		}.install()
 	}
 	return 0
