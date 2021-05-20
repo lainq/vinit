@@ -1,6 +1,6 @@
 module commands
 
-import os { args, getwd, is_file, join_path, read_file, execute }
+import os { args, execute, getwd, is_file, join_path, read_file }
 import exception { VinitException }
 
 struct InvalidCommandException {
@@ -60,22 +60,22 @@ fn (mut parser ScriptFileParser) parse(filename string) map[string]string {
 		value := statements[1..].join('=').trim(' ')
 		if name.len == 0 {
 			InvalidCommandException{
-				message : 'Variables names cannot be of length less than 1.',
-				suggestion : 'line number ${line_count + 1} in $filename',
-				fatal : true
+				message: 'Variables names cannot be of length less than 1.'
+				suggestion: 'line number ${line_count + 1} in $filename'
+				fatal: true
 			}.throw_exception()
 		}
 		if name in parser.scripts {
 			InvalidCommandException{
-				message : 'Found duplicate variable name - $name',
-				suggestion : 'line number ${line_count + 1} in $filename',
-				fatal : true
+				message: 'Found duplicate variable name - $name'
+				suggestion: 'line number ${line_count + 1} in $filename'
+				fatal: true
 			}.throw_exception()
 		}
 
 		duplicate_variables := map_filter(parser.scripts, value)
 		if duplicate_variables.len != 0 {
-			println('[WARNING] Found duplicate for variable $${duplicate_variables} : $name')
+			println('[WARNING] Found duplicate for variable $$duplicate_variables : $name')
 		}
 
 		parser.scripts[name] = value
@@ -91,7 +91,7 @@ mut:
 	exists bool
 }
 
-fn value(data string) string {	
+fn value(data string) string {
 	return data.split("'")[1]
 }
 
@@ -118,9 +118,9 @@ pub fn execute_v_script(script string) {
 		}
 
 		mut parser := ScriptFileParser{
-			data : file_content.split_into_lines()
+			data: file_content.split_into_lines()
 		}
-	    mut scripts := parser.parse(file.filename)
+		mut scripts := parser.parse(file.filename)
 		data := replace_statement_variables(mut scripts)
 		if value(script) in data {
 			execute(data[value(script)])
