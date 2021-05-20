@@ -1,6 +1,6 @@
 module commands
 
-import os { args, getwd, is_file, join_path, read_file }
+import os { args, getwd, is_file, join_path, read_file, execute }
 import exception { VinitException }
 
 struct InvalidCommandException {
@@ -91,13 +91,16 @@ mut:
 	exists bool
 }
 
+fn value(data string) string {	
+	return data.split("'")[1]
+}
 
 fn find_script_file(script_file ScriptsFile) bool {
 	filepath := join_path(script_file.root, script_file.filename)
 	return is_file(filepath)
 }
 
-pub fn execute_v_script(script string, variables map[string]string) {
+pub fn execute_v_script(script string) {
 	mut file := ScriptsFile{
 		filename: 'v.scripts'
 		root: getwd()
@@ -119,6 +122,13 @@ pub fn execute_v_script(script string, variables map[string]string) {
 		}
 	    mut scripts := parser.parse(file.filename)
 		data := replace_statement_variables(mut scripts)
-		println(data)
+		if value(script) in data {
+			execute(data[value(script)])
+		} else {
+			InvalidCommandException{
+				message: '${args[1..][0]} is not a command'
+				fatal: true
+			}.throw_exception()
+		}
 	}
 }
