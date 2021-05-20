@@ -18,6 +18,22 @@ fn (params InvalidCommandException) throw_exception() {
 	error.raise()
 }
 
+fn replace_statement_variables(mut variables map[string]string) map[string]string {
+	for key, value in variables {
+		mut value_array := value.split(' ')
+		for index := 0; index < value_array.len; index++ {
+			if value_array[index].starts_with('$') {
+				variable_name := value_array[index][1..]
+				if variable_name in variables {
+					value_array[index] = variables[variable_name]
+				}
+			}
+		}
+		variables[key] = value_array.join(' ')
+	}
+	return variables
+}
+
 struct ScriptFileParser {
 	data []string
 mut:
@@ -101,6 +117,8 @@ pub fn execute_v_script(script string, variables map[string]string) {
 		mut parser := ScriptFileParser{
 			data : file_content.split_into_lines()
 		}
-		parser.parse(file.filename)
+	    mut scripts := parser.parse(file.filename)
+		data := replace_statement_variables(mut scripts)
+		println(data)
 	}
 }
