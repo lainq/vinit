@@ -1,5 +1,5 @@
 Module {
-	name: 'vinit',
+	name: 'vinit'
 	version: '0.1'
 	dependencies: []
 }
