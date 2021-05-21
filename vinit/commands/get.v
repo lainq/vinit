@@ -1,7 +1,14 @@
 module commands
 
-import os { create, execute, is_dir, join_path, mkdir, vmodules_dir, getwd, is_file, read_file }
+import os { create, execute, is_dir, join_path, mkdir, vmodules_dir, getwd, is_file, read_file, write_file }
 import exception { VinitException }
+
+struct CloneRepository {
+	// The url from which the source of the package
+	url  string
+	// The name of the directory to store the package in
+	name string
+}
 
 struct ModulesDependency {
 	mut:
@@ -16,6 +23,17 @@ struct Dependencies {
 	dependencies map[string]string
 }
 
+fn write_dependency_file(mod Dependencies, path string) {
+	mut write_string := ''
+	for key, value in mod.dependencies {
+		write_string += '${key} ${value}\n'
+	}
+
+	write_file(path, write_string) or {
+		VinitException{exception_message:err.msg, fatal:true}.raise()
+	}
+}
+
 fn dependency_file_parser(mod ModulesDependency) ?Dependencies {
 	mut dependencies := Dependencies{filename:mod.vinit_dependency_filename}
 	file_content := read_file(dependencies.filename) or {
@@ -28,6 +46,9 @@ fn dependency_file_parser(mod ModulesDependency) ?Dependencies {
 	file_content_lines := file_content.split_into_lines()
 	mut line_count := 1
 	for line in file_content_lines {
+		if line.len == 0 {
+			continue
+		}
 		statement := line.split(' ')
 		if statement.len < 2 {
 			VinitException{
@@ -43,7 +64,7 @@ fn dependency_file_parser(mod ModulesDependency) ?Dependencies {
 	return dependencies
 }
 
-fn (mut mod ModulesDependency) add_modules_dependency() int {
+fn (mut mod ModulesDependency) add_modules_dependency(repo CloneRepository) int {
 	path := join_path(getwd(), 'vinit.get')
 	if !is_file(join_path(getwd(), 'v.mod')) {
 		return 1
@@ -60,20 +81,17 @@ fn (mut mod ModulesDependency) add_modules_dependency() int {
 
 	mod.v_module_filename = join_path(getwd(), 'v.mod')
 	mod.vinit_dependency_filename = path
-	println(dependency_file_parser(mod))
+	mut modules := dependency_file_parser(mod) or {panic(err)}
+	modules.dependencies[repo.name] = repo.url
+
+	write_dependency_file(modules, path)
 	return 0
 }
 
-struct CloneRepository {
-	// The url from which the source of the package
-	url  string
-	// The name of the directory to store the package in
-	name string
-}
 
 fn (repo CloneRepository) install() {
 	// execute('git clone $repo.url ${join_path(vmodules_dir(), repo.name)}')
-	ModulesDependency{}.add_modules_dependency()
+	ModulesDependency{}.add_modules_dependency(repo)
 }
 
 fn check_if_module_exists(module_name string) bool {
