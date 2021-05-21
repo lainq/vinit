@@ -1,12 +1,46 @@
 module commands
 
-import os { create, execute, is_dir, join_path, mkdir, vmodules_dir, getwd, is_file }
+import os { create, execute, is_dir, join_path, mkdir, vmodules_dir, getwd, is_file, read_file }
 import exception { VinitException }
 
 struct ModulesDependency {
 	mut:
 	v_module_filename string
 	vinit_dependency_filename string
+}
+
+struct Dependencies {
+	filename string
+
+	mut:
+	dependencies map[string]string
+}
+
+fn dependency_file_parser(mod ModulesDependency) ?Dependencies {
+	mut dependencies := Dependencies{filename:mod.vinit_dependency_filename}
+	file_content := read_file(dependencies.filename) or {
+		VinitException{
+			exception_message : err.msg,
+			fatal : true
+		}.raise()
+		return dependencies
+	}
+	file_content_lines := file_content.split_into_lines()
+	mut line_count := 1
+	for line in file_content_lines {
+		statement := line.split(' ')
+		if statement.len < 2 {
+			VinitException{
+				exception_message : 'Expected two parameters, but got ${statement.len}',
+				exception_suggestion : 'line number $line_count in $',
+				fatal : true
+			}.raise()
+			return dependencies
+		}
+		name, url := statement[0], statement[1]
+		dependencies.dependencies[name] = url
+	}
+	return dependencies
 }
 
 fn (mut mod ModulesDependency) add_modules_dependency() int {
@@ -26,7 +60,7 @@ fn (mut mod ModulesDependency) add_modules_dependency() int {
 
 	mod.v_module_filename = join_path(getwd(), 'v.mod')
 	mod.vinit_dependency_filename = path
-	println(mod)
+	println(dependency_file_parser(mod))
 	return 0
 }
 
