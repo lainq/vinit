@@ -25,19 +25,12 @@
 
 
 ## Setup
-You will have to manually clone the repository to install vinit.
-```sh
-# Clone the repository
-git clone https://github.com/pranavbaburaj/vinit.git
-```
-
-```sh
-# Node dependencies
-npm -v
-node -v
-npm install
-npm install typescript ts-node -g
-```
+How to setup vinit on your local system
+- Windows
+  Windows users can download the vinit executablew from the releases or build the vinit source
+  with the `windows-build.ps1` powershell script.
+- Linux
+  Linux users can use the `linux-build.sh` file in the releases. 
 
 ##  How to use it?
 ```sh
