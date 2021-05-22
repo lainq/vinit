@@ -16,7 +16,6 @@
     <img src="https://img.shields.io/discord/808537055177080892.svg">
     <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
     <img src="https://img.shields.io/github/last-commit/pranavbaburaj/vinit">
-    <a href="https://twitter.com/intent/tweet?text=Vinit,%20a%20command%20line%20tool%20to%20generate%20v%20projects%20and%20run%20scripts&url=https://github.com/pranavbaburaj/vinit&via=baburaj_pranav&hashtags=developers,polyglot,language"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a>
     <img src="https://tokei.rs/b1/github/pranavbaburaj/vinit">
   </p>
 
@@ -26,11 +25,9 @@
 
 ## Setup
 How to setup vinit on your local system
-- Windows
-  Windows users can download the vinit executablew from the releases or build the vinit source
-  with the `windows-build.ps1` powershell script.
-- Linux
-  Linux users can use the `linux-build.sh` file in the releases. 
+- Windows users can download the vinit executablew from the releases or build the vinit source
+  with the [`windows-build.ps1`](https://github.com/pranavbaburaj/vinit/releases/download/1.0.1/windows-build.ps1) powershell script.
+- Linux users can use the [`linux-build.sh`](https://github.com/pranavbaburaj/vinit/releases/download/1.0.1/linux-build.sh) file in the releases. 
 
 ##  How to use it?
 ```sh
