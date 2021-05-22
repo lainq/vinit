@@ -93,7 +93,7 @@ fn (mut mod ModulesDependency) add_modules_dependency(repo CloneRepository) int 
 }
 
 fn (repo CloneRepository) install() {
-	// execute('git clone $repo.url ${join_path(vmodules_dir(), repo.name)}')
+	execute('git clone $repo.url ${join_path(vmodules_dir(), repo.name)}')
 	ModulesDependency{}.add_modules_dependency(repo)
 }
 
