@@ -2,6 +2,9 @@ module commands
 
 import os { getwd, join_path, user_os }
 
+// Generate the path of the project based on
+// the project name
+// . denotes current directory
 fn generate_project_directory(name string) string {
 	if (name == '.') || (name.len == 0) {
 		return getwd()

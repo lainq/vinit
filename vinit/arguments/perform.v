@@ -1,6 +1,6 @@
 module arguments
 
-import commands { execute_v_script, initialize_v_project, get, install, DependencyFiles }
+import commands { DependencyFiles, execute_v_script, get, initialize_v_project, install }
 import os { getwd }
 
 pub fn execute_command(command CurrentCharacterType, parameters map[string]string) {
@@ -10,10 +10,10 @@ pub fn execute_command(command CurrentCharacterType, parameters map[string]strin
 		get()
 	} else if (command as string) == "arguments.CurrentCharacterType('install')" {
 		install(mut DependencyFiles{
-			dirname : getwd(),
-			filename : 'vinit.get'
+			dirname: getwd()
+			filename: 'vinit.get'
 		})
-	} else{
+	} else {
 		execute_v_script(command as string)
-	} 
+	}
 }

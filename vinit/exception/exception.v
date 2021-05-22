@@ -1,9 +1,16 @@
 module exception
 
 pub struct VinitException {
-	exception_message    string
+	// The exception message
+	exception_message string
+	// The suggestion to solve the error
+	// or line numbers if the error is
+	// related to files
 	exception_suggestion string
-	fatal                bool
+	// Whether if the error is fatal or not.
+	// inorder to exist the program after
+	// throwing the error
+	fatal bool
 }
 
 pub fn (vinit_exception VinitException) raise() {
