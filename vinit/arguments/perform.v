@@ -1,6 +1,12 @@
 module arguments
 
-import commands { DependencyFiles, execute_v_script, get, initialize_v_project, install }
+import commands { 
+	DependencyFiles, 
+	execute_v_script, 
+	get, 
+	initialize_v_project, 
+	install
+ }
 import os { getwd }
 
 pub fn execute_command(command CurrentCharacterType, parameters map[string]string) {
