@@ -24,24 +24,11 @@
 
 Vinit can be used to
 
-<<<<<<< HEAD
+
  - Generate v project
  - Install modules from a git repository
  - Run scripts
-=======
-## Setup
-How to setup vinit on your local system
-- Windows users can download the vinit executablew from the releases or build the vinit source
-  with the [`windows-build.ps1`](https://github.com/pranavbaburaj/vinit/releases/download/1.0.1/windows-build.ps1) powershell script.
-- Linux users can use the [`linux-build.sh`](https://github.com/pranavbaburaj/vinit/releases/download/1.0.1/linux-build.sh) file in the releases. 
 
-##  How to use it?
-```sh
-ts-node index.ts <command> <params> 
-```
-
-### Commands :
->>>>>>> 258a593e4e4bcefbb7cf9fdf62ffc716789351a0
 
 ## Setup
 
