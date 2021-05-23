@@ -1,37 +1,65 @@
-## Welcome to GitHub Pages
+<p align="center">
+  <img src="https://i.imgur.com/xs4pUIG.png" aly="logo">
+  <h3 align="center">Vinit</h3>
 
-You can use the [editor on GitHub](https://github.com/pranavbaburaj/vinit/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+  <p align="center">
+    Vinit is a command line tool to generate v projects and run scripts
+    <br />
+<!--     <a href="https://python-polyglot.netlify.app/">📖 Documentation</a> -->
+    ·
+    <a href="https://github.com/pranavbaburaj/vinit/issues">Report a Bug</a>
+    ·
+    <a href="https://github.com/pranavbaburaj/vinit/pulls">Request Feature</a>
+  </p>
+  <br>
+  <p align="center">
+    <img src="https://img.shields.io/discord/808537055177080892.svg">
+    <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
+    <img src="https://img.shields.io/github/last-commit/pranavbaburaj/vinit">
+    <img src="https://tokei.rs/b1/github/pranavbaburaj/vinit">
+  </p>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+  <br />
+</p>
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Setup
+How to setup vinit on your local system
+- Windows users can download the vinit executablew from the releases or build the vinit source
+  with the [`windows-build.ps1`](https://github.com/pranavbaburaj/vinit/releases/download/1.0.1/windows-build.ps1) powershell script.
+- Linux users can use the [`linux-build.sh`](https://github.com/pranavbaburaj/vinit/releases/download/1.0.1/linux-build.sh) file in the releases. 
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+##  How to use it?
+```sh
+ts-node index.ts <command> <params> 
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Commands :
 
-### Jekyll Themes
+- ***init*** Create a new project
+- ***get*** Clone a repository into `vmodules`
+		-  `--url` The git repository url
+		- `--name` The name of the project
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/pranavbaburaj/vinit/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+		ts-node index.ts get --url=<url> --name=<name>
 
-### Support or Contact
+- ***run*** To run scripts
+To run script, your directory should have a `v.toml` file in which the scripts are written.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+The toml file has two main parts.
+		 1) `variables`: Where all the variables are declared
+		 2) `scripts` : Where all the scripts are defined
+An example `v.toml` file
+```sh
+[variables]
+compiler = 'ts-node'
+filename = 'E:\vlol\tests\prompt.ts'
+
+[scripts]
+run = '$compiler $filename'
+```
+
+To run the script
+```sh
+ts-node index.ts run --script-<script-name>
+```
