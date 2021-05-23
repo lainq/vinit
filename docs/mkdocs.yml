@@ -1,2 +1,6 @@
 site_name: Vinit
 theme : readthedocs
+nav :
+  - Overview : index.md
+  - Installation : installation.md
+
