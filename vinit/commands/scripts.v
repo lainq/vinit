@@ -123,7 +123,7 @@ pub fn execute_v_script(script string) {
 		mut scripts := parser.parse(file.filename)
 		data := replace_statement_variables(mut scripts)
 		if value(script) in data {
-			execute(data[value(script)])
+			println(execute(data[value(script)]).output)
 		} else {
 			InvalidCommandException{
 				message: '${args[1..][0]} is not a command'
