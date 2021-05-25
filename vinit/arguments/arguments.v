@@ -32,6 +32,11 @@ pub fn (mut parser ArgumentParser) parse() ?(string, map[string]string) {
 	mut command := ''
 	mut params := map[string]string{}
 
+	if parser.arguments.len == 0 {
+		println("Read the documentation - https://github.com/pranavbaburaj/vinit/tree/main/docs")
+		exit(1)
+	}
+
 	for index := 0; index < parser.arguments.len; index++ {
 		position.position = index
 		character = position.current_character()
