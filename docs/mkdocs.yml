@@ -3,4 +3,7 @@ theme : readthedocs
 nav :
   - Overview : index.md
   - Installation : installation.md
+  - Create a new project : project.md
+  - Clone a package into the vmodules : get.md
+  - Scripts : scripts.md
 
