@@ -33,7 +33,7 @@ pub fn (mut parser ArgumentParser) parse() ?(string, map[string]string) {
 	mut params := map[string]string{}
 
 	if parser.arguments.len == 0 {
-		println("Read the documentation - https://github.com/pranavbaburaj/vinit/tree/main/docs")
+		println('Read the documentation - https://github.com/pranavbaburaj/vinit/tree/main/docs')
 		exit(1)
 	}
 

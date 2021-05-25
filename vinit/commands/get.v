@@ -1,17 +1,17 @@
 module commands
 
-import os { 
-	create, 
-	getwd, 
-	is_dir, 
-	is_file, 
-	join_path, 
-	mkdir, 
-	read_file, 
-	vmodules_dir, 
+import os {
+	create,
+	execute,
+	getwd,
+	is_dir,
+	is_file,
+	join_path,
+	mkdir,
+	read_file,
+	vmodules_dir,
 	write_file,
-	execute
- }
+}
 import exception { VinitException }
 
 struct CloneRepository {
