@@ -41,3 +41,6 @@ on Window. Follow any of the steps below.
 
 ### Linux
 To install vinit on linux, download the `linux-build.sh` file from the [releases](https://github.com/pranavbaburaj/vinit/releases/latest) and run the script.
+
+## Documentation
+Read the documentation [here](https://github.com/pranavbaburaj/vinit/tree/main/docs)
