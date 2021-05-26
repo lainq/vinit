@@ -5,7 +5,7 @@
   <p align="center">
     Vinit is a command line tool to generate v projects and run scripts
     <br />
-<!--     <a href="https://python-polyglot.netlify.app/">📖 Documentation</a> -->
+    <a href="https://github.com/pranavbaburaj/vinit/tree/main/docs">📖 Documentation</a>
     ·
     <a href="https://github.com/pranavbaburaj/vinit/issues">Report a Bug</a>
     ·
